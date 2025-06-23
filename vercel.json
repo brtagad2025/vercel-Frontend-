@@ -19,6 +19,10 @@
       "dest": "backend/server.js"
     },
     {
+      "src": "/(.*\\.\\w+$)",
+      "dest": "/$1"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
