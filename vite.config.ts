@@ -7,4 +7,9 @@ export default defineConfig({
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
+  base: '/', // Ensures all assets are loaded from the root (important for Vercel)
+  build: {
+    outDir: 'dist', // Vercel expects the build output in 'dist'
+    emptyOutDir: true,
+  },
 });
