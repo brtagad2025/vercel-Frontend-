@@ -8,7 +8,7 @@ import contactRoutes from './routes/contactRoutes.js';
 
 const app = express();
 
-// CORS: Allow only your deployed frontend and local dev
+// ✅ Allowed Frontend Origins
 const allowedOrigins = [
   'https://tagad-platforms-website.vercel.app',
   'https://tagad-platforms-website-w9tx.vercel.app',
@@ -16,10 +16,13 @@ const allowedOrigins = [
   'http://localhost:3000'
 ];
 
+// ✅ CORS Configuration
 const corsOptions = {
   origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps, curl, or server-to-server)
-    if (!origin) return callback(null, true);
+    if (!origin) {
+      // Allow server-to-server or tools like Postman
+      return callback(null, true);
+    }
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -30,19 +33,17 @@ const corsOptions = {
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true,
-  optionsSuccessStatus: 200 // For legacy browsers
+  optionsSuccessStatus: 200
 };
 
-// Apply CORS globally
+// ✅ Apply CORS and JSON middleware
 app.use(cors(corsOptions));
-
-// Handle preflight requests for all routes
-app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable preflight for all
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection
+// ✅ MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
   .then(() => {
     console.log('✅ Connected to MongoDB Atlas successfully!');
@@ -51,10 +52,10 @@ mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
     console.error('❌ MongoDB connection error:', error);
   });
 
-// Routes
+// ✅ Routes
 app.use('/api/contact', contactRoutes);
 
-// Test routes
+// ✅ Health & Utility Endpoints
 app.get('/', (req, res) => {
   res.json({ 
     message: 'Tagad Platforms Backend API is running!',
@@ -71,7 +72,6 @@ app.get('/api', (req, res) => {
   });
 });
 
-// Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ 
     status: 'healthy',
@@ -80,7 +80,7 @@ app.get('/api/health', (req, res) => {
   });
 });
 
-// Error handling middleware
+// ✅ Error Handler
 app.use((err, req, res, next) => {
   if (err.message === 'Not allowed by CORS') {
     return res.status(403).json({
@@ -96,7 +96,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
+// ✅ 404 Catch-All
 app.all('/*', (req, res) => {
   res.status(404).json({ 
     message: 'API endpoint not found',
@@ -111,15 +111,15 @@ app.all('/*', (req, res) => {
   });
 });
 
-// For local development
+// ✅ Local Dev Listener
 const PORT = process.env.PORT || 5000;
 if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
     console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🌐 Allowed CORS origins: ${allowedOrigins.join(', ')}`);
+    console.log(`🌐 Allowed CORS origins:\n${allowedOrigins.join('\n')}`);
   });
 }
 
-// Export for Vercel serverless functions
+// ✅ Export for Vercel (Serverless)
 export default app;
