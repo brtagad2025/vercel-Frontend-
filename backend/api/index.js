@@ -1,5 +1,3 @@
-// api/index.js
-
 import 'dotenv/config';
 import express from 'express';
 import mongoose from 'mongoose';
@@ -12,23 +10,22 @@ import contactRoutes from '../routes/contactRoutes.js';
 const app = express();
 
 // --- CORS Configuration ---
-const allowedOrigins = process.env.NODE_ENV === 'production'
-  ? [
-      process.env.FRONTEND_URL,
-      'https://tagad-platforms-website-w9tx.vercel.app'
-    ]
-  : ['http://localhost:5173', 'http://localhost:3000'];
+const allowedOrigins = [
+  process.env.FRONTEND_URL,
+  /\.vercel\.app$/ // ✅ allow all Vercel preview deploys
+];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
+    if (!origin || allowedOrigins.some(o => typeof o === 'string' ? o === origin : o.test(origin))) {
       callback(null, true);
     } else {
       console.error(`❌ Blocked by CORS: ${origin}`);
       callback(new Error(`CORS policy: Origin ${origin} not allowed.`));
     }
   },
-  credentials: true
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS']
 }));
 
 // --- Middleware ---
