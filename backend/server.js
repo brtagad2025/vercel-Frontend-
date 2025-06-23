@@ -8,19 +8,18 @@ import contactRoutes from './routes/contactRoutes.js';
 
 const app = express();
 
-// Enhanced CORS configuration
+// CORS: Allow only your deployed frontend and local dev
 const allowedOrigins = [
-  'https://tagad-platforms-website.vercel.app', // Your live frontend domain
-  'https://tagad-platforms-website-w9tx.vercel.app', // Your previous deployment
+  'https://tagad-platforms-website.vercel.app',
+  'https://tagad-platforms-website-w9tx.vercel.app',
   'http://localhost:5173',
   'http://localhost:3000'
 ];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allow requests with no origin (like mobile apps or curl requests)
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or server-to-server)
     if (!origin) return callback(null, true);
-    
     if (allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
@@ -30,13 +29,14 @@ const corsOptions = {
   },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200 // For legacy browsers
 };
 
 // Apply CORS globally
 app.use(cors(corsOptions));
 
-// Handle preflight requests explicitly
+// Handle preflight requests for all routes
 app.options('*', cors(corsOptions));
 
 app.use(express.json());
@@ -44,12 +44,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
-.then(() => {
-  console.log('✅ Connected to MongoDB Atlas successfully!');
-})
-.catch((error) => {
-  console.error('❌ MongoDB connection error:', error);
-});
+  .then(() => {
+    console.log('✅ Connected to MongoDB Atlas successfully!');
+  })
+  .catch((error) => {
+    console.error('❌ MongoDB connection error:', error);
+  });
 
 // Routes
 app.use('/api/contact', contactRoutes);
@@ -85,11 +85,10 @@ app.use((err, req, res, next) => {
   if (err.message === 'Not allowed by CORS') {
     return res.status(403).json({
       error: 'CORS policy violation',
-      allowedOrigins: allowedOrigins,
+      allowedOrigins,
       yourOrigin: req.headers.origin || 'none'
     });
   }
-  
   console.error(err.stack);
   res.status(500).json({ 
     message: 'Something went wrong!',
