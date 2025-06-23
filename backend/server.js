@@ -8,17 +8,36 @@ import contactRoutes from './routes/contactRoutes.js';
 
 const app = express();
 
-// Middleware
+// Enhanced CORS configuration
+const allowedOrigins = [
+  'https://tagad-platforms-website-w9tx.vercel.app',
+  'http://localhost:5173',
+  'http://localhost:3000'
+];
+
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production' 
-    ? [process.env.FRONTEND_URL, 'https://your-frontend-domain.vercel.app']
-    : ['http://localhost:5173', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
   credentials: true
 }));
+
+// Handle preflight requests
+app.options('*', cors());
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// MongoDB Connection (updated for Atlas and Vercel)
+// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI || process.env.MONGO_URI)
 .then(() => {
   console.log('✅ Connected to MongoDB Atlas successfully!');
@@ -58,6 +77,14 @@ app.get('/api/health', (req, res) => {
 
 // Error handling middleware
 app.use((err, req, res, next) => {
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({
+      error: 'CORS policy violation',
+      allowedOrigins: allowedOrigins,
+      yourOrigin: req.headers.origin
+    });
+  }
+  
   console.error(err.stack);
   res.status(500).json({ 
     message: 'Something went wrong!',
@@ -65,14 +92,17 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler (Express v5+ compatible)
-app.all('/{*any}', (req, res) => {
+// 404 handler
+app.all('/*', (req, res) => {
   res.status(404).json({ 
     message: 'API endpoint not found',
+    requestedPath: req.originalUrl,
     availableEndpoints: [
-      '/api/contact/submit',
-      '/api/contact',
-      '/api/health'
+      'GET /',
+      'GET /api',
+      'GET /api/health',
+      'POST /api/contact/submit',
+      'GET /api/contact'
     ]
   });
 });
@@ -83,6 +113,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.listen(PORT, () => {
     console.log(`🚀 Server is running on port ${PORT}`);
     console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🌐 Allowed CORS origins: ${allowedOrigins.join(', ')}`);
   });
 }
 
