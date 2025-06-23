@@ -1,97 +1,10 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
 import Contact from '../models/contact.js';
-import XLSX from 'xlsx';
-import fs from 'fs';
-import path from 'path';
-import axios from 'axios';
-import FormData from 'form-data';
 
 const router = express.Router();
 
-// Function to create Excel file from contact data
-const createExcelFile = (contactData) => {
-  // Create workbook and worksheet
-  const wb = XLSX.utils.book_new();
-  
-  // Prepare data for Excel
-  const excelData = [
-    ['Field', 'Value'],
-    ['Name', contactData.name],
-    ['Email', contactData.email],
-    ['Company', contactData.company || 'Not provided'],
-    ['Service Interest', contactData.service || 'Not specified'],
-    ['Message', contactData.message],
-    ['Submission Date', new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })],
-    ['IP Address', contactData.ipAddress || 'Unknown'],
-    ['User Agent', contactData.userAgent || 'Unknown']
-  ];
-
-  const ws = XLSX.utils.aoa_to_sheet(excelData);
-  
-  // Add the worksheet to workbook
-  XLSX.utils.book_append_sheet(wb, ws, 'Contact Submission');
-  
-  // Generate filename with timestamp
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const filename = `contact-submission-${timestamp}.xlsx`;
-  const filepath = path.join(process.cwd(), 'temp', filename);
-  
-  // Create temp directory if it doesn't exist
-  const tempDir = path.join(process.cwd(), 'temp');
-  if (!fs.existsSync(tempDir)) {
-    fs.mkdirSync(tempDir, { recursive: true });
-  }
-  
-  // Write the file
-  XLSX.writeFile(wb, filepath);
-  
-  return { filename, filepath };
-};
-
-// Function to send file to WhatsApp (using a WhatsApp API service)
-const sendToWhatsApp = async (filepath, filename, contactData) => {
-  try {
-    // Using a free WhatsApp API service like CallMeBot or similar
-    // You'll need to replace this with your preferred WhatsApp API service
-    
-    // Option 1: Upload file to a temporary hosting service and send link
-    // This is a simple approach using file upload and WhatsApp Web API
-    
-    const message = `🔔 New Contact Form Submission!\n\n` +
-                   `📝 Name: ${contactData.name}\n` +
-                   `📧 Email: ${contactData.email}\n` +
-                   `🏢 Company: ${contactData.company || 'Not provided'}\n` +
-                   `🛠️ Service: ${contactData.service || 'Not specified'}\n` +
-                   `💬 Message: ${contactData.message}\n\n` +
-                   `📅 Date: ${new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })}\n\n` +
-                   `Excel file with complete details has been generated: ${filename}`;
-
-    // Simple WhatsApp Web API call (you may need to set up a WhatsApp Business API)
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=919356961657&text=${encodeURIComponent(message)}`;
-    
-    console.log('📧 Contact submission details:', {
-      name: contactData.name,
-      email: contactData.email,
-      company: contactData.company,
-      service: contactData.service,
-      message: contactData.message,
-      excelFile: filename
-    });
-    
-    console.log('🔗 WhatsApp link generated:', whatsappUrl);
-    
-    // For now, we'll log the details and you can manually check the generated Excel file
-    // In production, you'd integrate with a proper WhatsApp Business API
-    
-    return true;
-  } catch (error) {
-    console.error('Error sending to WhatsApp:', error);
-    return false;
-  }
-};
-
-// Submit contact form
+// Submit contact form (public route)
 router.post('/submit', [
   body('name')
     .trim()
@@ -142,7 +55,8 @@ router.post('/submit', [
     const ipAddress = req.ip || req.connection.remoteAddress || req.socket.remoteAddress;
     const userAgent = req.get('User-Agent');
 
-    const contactData = {
+    // Create new contact submission
+    const contact = new Contact({
       name,
       email,
       company: company || '',
@@ -150,35 +64,17 @@ router.post('/submit', [
       message,
       ipAddress,
       userAgent
-    };
+    });
 
-    // Create Excel file
-    const { filename, filepath } = createExcelFile(contactData);
-    
-    // Send to WhatsApp
-    const whatsappSent = await sendToWhatsApp(filepath, filename, contactData);
-    
-    // Still save to MongoDB (optional)
-    const contact = new Contact(contactData);
     await contact.save();
-
-    // Clean up the temp file after 1 hour
-    setTimeout(() => {
-      if (fs.existsSync(filepath)) {
-        fs.unlinkSync(filepath);
-        console.log(`🗑️ Cleaned up temp file: ${filename}`);
-      }
-    }, 3600000); // 1 hour
 
     // Log the submission
     console.log(`📧 New contact submission from: ${email}`);
-    console.log(`📊 Excel file created: ${filename}`);
 
     res.status(201).json({
       success: true,
-      message: 'Contact form submitted successfully! Excel file has been generated and notification sent.',
-      submissionId: contact._id,
-      excelFile: filename
+      message: 'Contact form submitted successfully! We will get back to you soon.',
+      submissionId: contact._id
     });
 
   } catch (error) {

@@ -27,7 +27,6 @@ const ContactPage = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
 
   useEffect(() => {
     gsap.fromTo('.contact-card',
@@ -53,7 +52,6 @@ const ContactPage = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setError('');
 
     try {
       const response = await fetch(`${API_URL}/api/contact/submit`, {
@@ -61,8 +59,7 @@ const ContactPage = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
-        credentials: 'include' // Essential for CORS with cookies
+        body: JSON.stringify(formData)
       });
 
       const result = await response.json();
@@ -83,12 +80,12 @@ const ContactPage = () => {
         if (result.errors && Array.isArray(result.errors)) {
           errorMsg += '\n' + result.errors.map((err: any) => err.msg).join('\n');
         }
-        setError(errorMsg);
+        alert(errorMsg);
         console.error('Submission failed:', result);
       }
     } catch (error) {
       console.error('Network error:', error);
-      setError('Network error. Please check your connection and try again.');
+      alert('Network error. Please check your connection and try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -180,16 +177,6 @@ const ContactPage = () => {
                   >
                     <CheckCircle className="h-5 w-5 text-green-400 mr-3" />
                     <span className="text-green-400">Message sent successfully! We'll get back to you soon.</span>
-                  </motion.div>
-                )}
-
-                {error && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="mb-6 p-4 bg-red-500/20 border border-red-500/50 rounded-lg flex items-center"
-                  >
-                    <span className="text-red-400">{error}</span>
                   </motion.div>
                 )}
 
