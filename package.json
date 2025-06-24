@@ -1,33 +1,25 @@
 {
-  "name": "tagad-platforms-website",
+  "name": "tagad-platforms-frontend",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -n \"FRONTEND,BACKEND\" -c \"blue,green\" \"vite\" \"npm run dev:backend\"",
-    "dev:backend": "cd backend && npm run dev",
+    "dev": "vite",
     "build": "vite build",
-    "vercel-build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@react-three/drei": "^9.88.13",
     "@react-three/fiber": "^8.15.11",
     "@supabase/supabase-js": "^2.50.0",
-    "cors": "^2.8.5",
-    "dotenv": "^16.5.0",
-    "express": "^5.1.0",
     "framer-motion": "^10.16.4",
     "gsap": "^3.12.2",
     "lucide-react": "^0.344.0",
-    "mongoose": "^8.16.0",
-    "nextjs-cors": "^2.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.5.3",
     "react-router-dom": "^6.26.1",
-    "serverless-http": "^3.2.0",
     "three": "^0.158.0"
   },
   "devDependencies": {
@@ -37,7 +29,6 @@
     "@types/three": "^0.158.3",
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.18",
-    "concurrently": "^9.2.0",
     "eslint": "^9.9.1",
     "eslint-plugin-react-hooks": "^5.1.0-rc.0",
     "eslint-plugin-react-refresh": "^0.4.11",
@@ -49,7 +40,7 @@
     "vite": "^5.4.2"
   },
   "description": "",
-  "main": "eslint.config.js",
+  "main": "index.js",
   "keywords": [],
   "author": "",
   "license": "ISC"
