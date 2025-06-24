@@ -3,7 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Points, PointMaterial, Sphere } from '@react-three/drei';
 import * as THREE from 'three';
 
-function Particles() {
+function Particles() { 
   const ref = useRef<THREE.Points>(null);
   const [sphere] = useMemo(() => {
     const sphere = new THREE.SphereGeometry(1, 32, 32);
@@ -11,7 +11,7 @@ function Particles() {
     return [positions];
   }, []);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (ref.current) {
       ref.current.rotation.x -= delta / 10;
       ref.current.rotation.y -= delta / 15;

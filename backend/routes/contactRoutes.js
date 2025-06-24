@@ -1,8 +1,14 @@
 import express from 'express';
 import { body, validationResult } from 'express-validator';
-import Contact from '../models/contact.js';
+import { createClient } from '@supabase/supabase-js';
 
 const router = express.Router();
+
+// Initialize Supabase client (use environment variables for security)
+const supabase = createClient(
+  process.env.SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY
+);
 
 // Submit contact form (public route)
 router.post('/submit', [
@@ -19,6 +25,10 @@ router.post('/submit', [
     .trim()
     .isLength({ max: 100 })
     .withMessage('Company name cannot exceed 100 characters'),
+  body('whatsapp')
+    .trim()
+    .isLength({ min: 10, max: 15 })
+    .withMessage('WhatsApp number must be between 10 and 15 characters'),
   body('service')
     .optional()
     .isIn([
@@ -49,24 +59,39 @@ router.post('/submit', [
       });
     }
 
-    const { name, email, company, service, message } = req.body;
+    const { name, email, company, whatsapp, service, message } = req.body;
 
     // Get client IP and user agent for tracking
-    const ipAddress = req.ip || req.connection.remoteAddress || req.socket.remoteAddress;
+    const ipAddress = req.ip || req.connection.remoteAddress || req.socket?.remoteAddress;
     const userAgent = req.get('User-Agent');
 
-    // Create new contact submission
-    const contact = new Contact({
+    // Prepare contact data
+    const contactData = {
       name,
       email,
       company: company || '',
+      whatsapp,
       service: service || '',
       message,
-      ipAddress,
-      userAgent
-    });
+      ip_address: ipAddress,
+      user_agent: userAgent,
+      created_at: new Date().toISOString()
+    };
 
-    await contact.save();
+    // Insert into Supabase
+    const { data, error } = await supabase
+      .from('contacts')
+      .insert([contactData])
+      .select();
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to submit contact form. Please try again later.',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
 
     // Log the submission
     console.log(`📧 New contact submission from: ${email}`);
@@ -74,7 +99,7 @@ router.post('/submit', [
     res.status(201).json({
       success: true,
       message: 'Contact form submitted successfully! We will get back to you soon.',
-      submissionId: contact._id
+      submissionId: data && data[0] ? data[0].id : null
     });
 
   } catch (error) {
@@ -90,7 +115,20 @@ router.post('/submit', [
 // Get all contact submissions (no authentication for now)
 router.get('/', async (req, res) => {
   try {
-    const contacts = await Contact.find().sort({ createdAt: -1 }).limit(10);
+    const { data: contacts, error } = await supabase
+      .from('contacts')
+      .select('*')
+      .order('created_at', { ascending: false })
+      .limit(10);
+
+    if (error) {
+      console.error('Supabase error:', error);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to retrieve contact submissions',
+        error: process.env.NODE_ENV === 'development' ? error.message : undefined
+      });
+    }
     
     res.json({
       success: true,

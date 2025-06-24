@@ -1,23 +1,19 @@
 import 'dotenv/config';
 import express from 'express';
-import mongoose from 'mongoose';
 import cors from 'cors';
-import serverless from 'serverless-http';
-
-// Routes
-import contactRoutes from '../routes/contactRoutes.js';
+import contactRoutes from '../routes/contactRoutes.js'; // ✅ CORRECT
 
 const app = express();
 
 // --- CORS Configuration ---
 const allowedOrigins = [
   process.env.FRONTEND_URL,
-  /\.vercel\.app$/ // ✅ allow all Vercel preview deploys
+  'http://localhost:5173'
 ];
 
 app.use(cors({
   origin: (origin, callback) => {
-    if (!origin || allowedOrigins.some(o => typeof o === 'string' ? o === origin : o.test(origin))) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       console.error(`❌ Blocked by CORS: ${origin}`);
@@ -28,29 +24,8 @@ app.use(cors({
   methods: ['GET', 'POST', 'OPTIONS']
 }));
 
-// --- Middleware ---
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// --- MongoDB Connection ---
-let isConnected = false;
-
-const connectMongo = async () => {
-  if (!isConnected) {
-    try {
-      await mongoose.connect(process.env.MONGODB_URI);
-      isConnected = true;
-      console.log('✅ Connected to MongoDB Atlas');
-    } catch (error) {
-      console.error('❌ MongoDB connection error:', error.message);
-    }
-  }
-};
-
-app.use(async (req, res, next) => {
-  await connectMongo();
-  next();
-});
 
 // --- Routes ---
 app.use('/api/contact', contactRoutes);
@@ -72,14 +47,6 @@ app.get('/api', (req, res) => {
   });
 });
 
-app.get('/api/health', async (req, res) => {
-  res.json({
-    status: 'healthy',
-    database: mongoose.connection.readyState === 1 ? 'connected' : 'disconnected',
-    timestamp: new Date().toISOString()
-  });
-});
-
 // --- Error Handler ---
 app.use((err, req, res, next) => {
   console.error('❌ Error:', err.stack || err.message);
@@ -89,8 +56,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-// --- 404 Handler ---
-app.all('*', (req, res) => {
+// --- 404 Handler (Express 5 compatible) ---
+app.all('/{*any}', (req, res) => {
   res.status(404).json({
     message: 'API endpoint not found',
     availableEndpoints: [
@@ -101,5 +68,10 @@ app.all('*', (req, res) => {
   });
 });
 
-// --- Export for Vercel Serverless ---
-export const handler = serverless(app);
+// --- Start the server ---
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running on port ${PORT}`);
+});
+
+export default app; // (optional, for testing)
