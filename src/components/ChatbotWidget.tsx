@@ -74,7 +74,7 @@ const ChatbotWidget: React.FC = () => {
         <div
           style={{
             position: "fixed",
-            bottom: 24,
+            bottom: 150,
             right: 24,
             width: 340,
             maxWidth: "90vw",
