@@ -12,7 +12,7 @@ interface Message {
 const ChatbotWidget: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
-    { from: "bot", text: "Hi there 👋 If you need any assistance, I’m always here." }
+    { from: "bot", text: "Hi there TAGAD'S AI 👋 If you need any assistance, I’m always here." }
   ]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -102,7 +102,7 @@ const ChatbotWidget: React.FC = () => {
             justifyContent: "space-between"
           }}>
             <div>
-              <strong>Chat with Jessica Smith</strong>
+              <strong>Chat with TAGAD'S AI</strong>
               <div style={{ fontSize: 12, opacity: 0.85 }}>We are online!</div>
             </div>
             <button onClick={() => setOpen(false)} style={{
