@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import ChatbotWidget from '../components/ChatbotWidget';
 import { 
   Users, 
   MessageSquare, 
@@ -326,6 +327,7 @@ const AdminDashboard = () => {
         </div>
       )}
     </div>
+    <ChatbotWidget />
   );
 };
 
