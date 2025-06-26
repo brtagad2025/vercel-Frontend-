@@ -154,18 +154,18 @@ const ChatbotWidget: React.FC = () => {
               onSubmit={handleSubmit}
             >
 <input
-  className="chatbot-input-fix"
+  className="text-gray-900 bg-white placeholder-gray-400 border border-gray-300 rounded-lg p-2.5"
   value={input}
   onChange={e => setInput(e.target.value)}
   disabled={loading}
   placeholder="Enter your message..."
   style={{
     flex: 1,
-    border: "1px solid #ddd",
-    borderRadius: 8,
-    padding: "8px 12px"
+    // Remove color here, Tailwind will handle it
+    // color: "#222"
   }}
 />
+
              <button
                 type="submit"
                 disabled={loading || !input.trim()}
