@@ -2,6 +2,8 @@ import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import ChatbotWidget from '../components/ChatbotWidget';
+
 import { 
   Target, 
   Globe, 
@@ -269,6 +271,7 @@ const AboutPage = () => {
         </div>
       </section>
     </div>
+    <ChatbotWidget />
   );
 };
 
