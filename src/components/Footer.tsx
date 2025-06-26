@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Zap, Mail, Phone, MapPin, Twitter, Linkedin, Instagram, Github } from 'lucide-react';
 import React, { useState, useRef, useEffect, FormEvent } from "react";
-import ChatbotWidget from '../components/ChatbotWidget';
 
 
 // --- Chatbot Widget Component ---
