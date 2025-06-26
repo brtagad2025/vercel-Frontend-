@@ -153,8 +153,8 @@ const ChatbotWidget: React.FC = () => {
               style={{ display: "flex", gap: 8 }}
               onSubmit={handleSubmit}
             >
-             <input
-  className="chatbot-input"
+<input
+  className="chatbot-input-fix"
   value={input}
   onChange={e => setInput(e.target.value)}
   disabled={loading}
@@ -166,6 +166,7 @@ const ChatbotWidget: React.FC = () => {
     padding: "8px 12px"
   }}
 />
+
 
 
 
