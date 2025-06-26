@@ -163,9 +163,10 @@ const ChatbotWidget: React.FC = () => {
     border: "1px solid #ddd",
     borderRadius: 8,
     padding: "8px 12px",
-    color: "#222" // <-- Add this line
+    color: "#222" // <-- This makes the typed text dark and visible
   }}
 />
+
 
               <button
                 type="submit"
