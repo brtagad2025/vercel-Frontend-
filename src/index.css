@@ -136,12 +136,12 @@ button,
   backdrop-filter: blur(20px) saturate(150%);
 }
 
-/* Add this at the end of your CSS file */
-.chatbot-input {
+/* Add this at the end of your global CSS file */
+.chatbot-input-fix {
   color: #222 !important;
   background: #fff !important;
 }
-
-.chatbot-input::placeholder {
+.chatbot-input-fix::placeholder {
   color: #888 !important;
 }
+
