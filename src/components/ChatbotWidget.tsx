@@ -110,7 +110,7 @@ const ChatbotWidget: React.FC = () => {
                 }}
               />
               <div>
-                <strong>Chat with Jessica Smith</strong>
+                <strong>Chat with TAGAD'S AI</strong>
                 <div style={{ fontSize: 12, opacity: 0.85 }}>We are online!</div>
               </div>
             </div>
