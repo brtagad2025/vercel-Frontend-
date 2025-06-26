@@ -166,11 +166,7 @@ const ChatbotWidget: React.FC = () => {
     padding: "8px 12px"
   }}
 />
-
-
-
-
-              <button
+             <button
                 type="submit"
                 disabled={loading || !input.trim()}
                 style={{
