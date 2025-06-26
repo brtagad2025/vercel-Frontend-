@@ -135,3 +135,13 @@ button,
 .backdrop-blur-custom {
   backdrop-filter: blur(20px) saturate(150%);
 }
+
+/* Add this at the end of your CSS file */
+.chatbot-input {
+  color: #222 !important;
+  background: #fff !important;
+}
+
+.chatbot-input::placeholder {
+  color: #888 !important;
+}
