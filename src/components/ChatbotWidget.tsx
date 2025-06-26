@@ -153,7 +153,8 @@ const ChatbotWidget: React.FC = () => {
               style={{ display: "flex", gap: 8 }}
               onSubmit={handleSubmit}
             >
-              <input
+             <input
+  className="chatbot-input"
   value={input}
   onChange={e => setInput(e.target.value)}
   disabled={loading}
@@ -162,10 +163,10 @@ const ChatbotWidget: React.FC = () => {
     flex: 1,
     border: "1px solid #ddd",
     borderRadius: 8,
-    padding: "8px 12px",
-    color: "#222" // <-- This makes the typed text dark and visible
+    padding: "8px 12px"
   }}
 />
+
 
 
               <button
