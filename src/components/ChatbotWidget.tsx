@@ -154,17 +154,19 @@ const ChatbotWidget: React.FC = () => {
               onSubmit={handleSubmit}
             >
               <input
-                value={input}
-                onChange={e => setInput(e.target.value)}
-                disabled={loading}
-                placeholder="Enter your message..."
-                style={{
-                  flex: 1,
-                  border: "1px solid #ddd",
-                  borderRadius: 8,
-                  padding: "8px 12px"
-                }}
-              />
+  value={input}
+  onChange={e => setInput(e.target.value)}
+  disabled={loading}
+  placeholder="Enter your message..."
+  style={{
+    flex: 1,
+    border: "1px solid #ddd",
+    borderRadius: 8,
+    padding: "8px 12px",
+    color: "#222" // <-- Add this line
+  }}
+/>
+
               <button
                 type="submit"
                 disabled={loading || !input.trim()}
