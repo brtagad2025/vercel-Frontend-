@@ -21,11 +21,11 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
           <p>
             <strong>Tagad Platforms LLP</strong> (“we”, “us”, or “our”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or use our services.
           </p>
-          <ul className="list-disc pl-6">
-            <li><strong>Information We Collect:</strong> We may collect personal information such as your name, email address, phone number, company, and any information you submit via forms or chatbots. We also collect usage data (IP address, browser, device info, pages visited) and use cookies for analytics and site functionality.</li>
-            <li><strong>How We Use Your Information:</strong> To provide and improve our services, respond to your inquiries, send updates or marketing (with your consent), analyze usage, protect our site, and comply with legal obligations.</li>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>Information We Collect:</strong> Personal details (name, email, phone, company), usage data (IP, browser, device), and information you submit via forms or chatbots. We use cookies for analytics and site functionality.</li>
+            <li><strong>How We Use Your Information:</strong> To provide and improve services, respond to inquiries, send updates or marketing (with your consent), analyze usage, protect our site, and comply with legal obligations.</li>
             <li><strong>Sharing Your Information:</strong> We do <b>not</b> sell your information. We may share it with trusted service providers, for legal reasons, or as part of a business transfer.</li>
-            <li><strong>Cookies:</strong> We use cookies and similar technologies for site functionality and analytics. You can control cookies via your browser settings.</li>
+            <li><strong>Cookies:</strong> Used for site functionality and analytics. You can control cookies via your browser settings.</li>
             <li><strong>Data Security:</strong> We use reasonable security measures to protect your data, but no method of transmission is 100% secure.</li>
             <li><strong>Your Rights:</strong> You can request access, correction, or deletion of your data, and object to or restrict processing. Contact us at <a href="mailto:info@brtagad.com" className="text-blue-500 underline">info@brtagad.com</a>.</li>
             <li><strong>Children’s Privacy:</strong> We do not knowingly collect data from children under 16.</li>
@@ -38,12 +38,47 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
   );
 };
 
-// --- Chatbot Widget Component ---
+// --- Terms of Service Modal ---
+const TermsModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black/60">
+      <div className="bg-white max-w-2xl w-full rounded-lg shadow-lg p-6 relative overflow-y-auto max-h-[90vh]">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-4 text-2xl text-gray-500 hover:text-blue-500"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <h2 className="text-2xl font-bold mb-4 text-blue-700">Terms of Service</h2>
+        <div className="text-gray-700 text-sm space-y-4" style={{ maxHeight: "70vh", overflowY: "auto" }}>
+          <p><strong>Last updated:</strong> June 28, 2025</p>
+          <p>
+            <strong>Agreement to Terms:</strong> By accessing and using Tagad Platforms LLP’s website or services, you agree to these Terms of Service. If you do not agree, do not use our site or services.
+          </p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>Use of Services:</strong> You must be at least 16 years old. Do not use our services for unlawful, harmful, or abusive activities.</li>
+            <li><strong>Prohibited Uses:</strong> No spamming, hacking, copyright infringement, harassment, or posting of illegal/obscene content.</li>
+            <li><strong>Intellectual Property:</strong> All site content, trademarks, and software are owned by Tagad Platforms LLP or its licensors. Do not copy, reuse, or redistribute without permission.</li>
+            <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your account credentials.</li>
+            <li><strong>Third-Party Links:</strong> We may link to third-party sites. We are not responsible for their content or privacy practices.</li>
+            <li><strong>Limitation of Liability:</strong> We are not liable for damages resulting from your use of our site, except as required by law.</li>
+            <li><strong>Dispute Resolution:</strong> Any disputes will be governed by the laws of Ontario, Canada. You agree to resolve disputes through binding arbitration or small claims court.</li>
+            <li><strong>Changes to Terms:</strong> We may update these terms at any time. Continued use means you accept the new terms.</li>
+            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:info@brtagad.com" className="text-blue-500 underline">info@brtagad.com</a>, Phone: +91 9356961657</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// --- Chatbot Widget Component (as before) ---
 interface Message {
   from: "user" | "bot";
   text: string;
 }
-
 const ChatbotWidget: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
@@ -186,7 +221,7 @@ const ChatbotWidget: React.FC = () => {
                   borderRadius: 8,
                   padding: "8px 12px",
                   color: "#222",
-                  background: "#fffbe6" // Light yellow for visibility
+                  background: "#fffbe6"
                 }}
               />
               <button
@@ -212,10 +247,10 @@ const ChatbotWidget: React.FC = () => {
   );
 };
 
-// --- Footer Component ---
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [privacyOpen, setPrivacyOpen] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
 
   return (
     <>
@@ -345,7 +380,14 @@ const Footer = () => {
               >
                 Privacy Policy
               </a>
-              <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors">
+              <a
+                href="#"
+                className="text-gray-400 hover:text-blue-400 text-sm transition-colors"
+                onClick={e => {
+                  e.preventDefault();
+                  setTermsOpen(true);
+                }}
+              >
                 Terms of Service
               </a>
             </div>
@@ -385,6 +427,9 @@ const Footer = () => {
 
       {/* Privacy Policy Modal */}
       <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
+
+      {/* Terms of Service Modal */}
+      <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
     </>
   );
 };
