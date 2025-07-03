@@ -346,24 +346,28 @@ const Footer = () => {
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-white">Contact Info</h3>
-              <div className="space-y-3">
-                <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <Mail className="h-4 w-4 text-blue-400" />
-                  <span>info@brtagad.com</span>
-                </div>
-                <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <Phone className="h-4 w-4 text-blue-400" />
-                  <span>+91 9356961657</span>
-                </div>
-                <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <MapPin className="h-4 w-4 text-blue-400" />
-                  <span>Canada: 3070 Rotary Way, Burlington ON L7M 0H1.</span>
-                </div>
-              </div>
-            </div>
-          </div>
+<div className="space-y-4">
+  <h3 className="text-lg font-semibold text-white">Contact Info</h3>
+  <div className="space-y-3">
+    <div className="flex items-center space-x-3 text-gray-400 text-sm">
+      <Mail className="h-4 w-4 text-blue-400" />
+      <span>support@brtagad.com</span>
+    </div>
+    <div className="flex items-center space-x-3 text-gray-400 text-sm">
+      <Phone className="h-4 w-4 text-blue-400" />
+      <span>+91 9356961657</span>
+    </div>
+    <div className="flex items-center space-x-3 text-gray-400 text-sm">
+      <MapPin className="h-4 w-4 text-blue-400" />
+      <span>Canada: 3070 Rotary Way, Burlington ON L7M 0H1.</span>
+    </div>
+    <div className="flex items-center space-x-3 text-gray-400 text-sm">
+      <MapPin className="h-4 w-4 text-blue-400" />
+      <span>Pune MH, India</span>
+    </div>
+  </div>
+</div>
+
 
           <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
