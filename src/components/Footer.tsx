@@ -30,7 +30,7 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
             <li><strong>Your Rights:</strong> You can request access, correction, or deletion of your data, and object to or restrict processing. Contact us at <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>.</li>
             <li><strong>Children’s Privacy:</strong> We do not knowingly collect data from children under 16.</li>
             <li><strong>Changes:</strong> We may update this policy. The latest version will always be posted here.</li>
-            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada & Pune MH, India. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
+            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
           </ul>
         </div>
       </div>
@@ -66,7 +66,7 @@ const TermsModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
             <li><strong>Limitation of Liability:</strong> We are not liable for damages resulting from your use of our site, except as required by law.</li>
             <li><strong>Dispute Resolution:</strong> Any disputes will be governed by the laws of Ontario, Canada. You agree to resolve disputes through binding arbitration or small claims court.</li>
             <li><strong>Changes to Terms:</strong> We may update these terms at any time. Continued use means you accept the new terms.</li>
-            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada & Pune MH, India. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
+            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
           </ul>
         </div>
       </div>
