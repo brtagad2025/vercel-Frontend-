@@ -19,7 +19,7 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
         <div className="text-gray-700 text-sm space-y-4" style={{ maxHeight: "70vh", overflowY: "auto" }}>
           <p><strong>Last updated:</strong> June 28, 2025</p>
           <p>
-            <strong>Tagad Platforms LLP</strong> (“we”, “us”, or “our”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or use our services.
+            <strong>Tagad Platforms</strong> (“we”, “us”, or “our”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or use our services.
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Information We Collect:</strong> Personal details (name, email, phone, company), usage data (IP, browser, device), and information you submit via forms or chatbots. We use cookies for analytics and site functionality.</li>
@@ -30,7 +30,7 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
             <li><strong>Your Rights:</strong> You can request access, correction, or deletion of your data, and object to or restrict processing. Contact us at <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>.</li>
             <li><strong>Children’s Privacy:</strong> We do not knowingly collect data from children under 16.</li>
             <li><strong>Changes:</strong> We may update this policy. The latest version will always be posted here.</li>
-            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
+            <li><strong>Contact:</strong> Tagad Platforms, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
           </ul>
         </div>
       </div>
@@ -55,18 +55,18 @@ const TermsModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
         <div className="text-gray-700 text-sm space-y-4" style={{ maxHeight: "70vh", overflowY: "auto" }}>
           <p><strong>Last updated:</strong> June 28, 2025</p>
           <p>
-            <strong>Agreement to Terms:</strong> By accessing and using Tagad Platforms LLP’s website or services, you agree to these Terms of Service. If you do not agree, do not use our site or services.
+            <strong>Agreement to Terms:</strong> By accessing and using Tagad Platforms ’s website or services, you agree to these Terms of Service. If you do not agree, do not use our site or services.
           </p>
           <ul className="list-disc pl-6 space-y-2">
             <li><strong>Use of Services:</strong> You must be at least 16 years old. Do not use our services for unlawful, harmful, or abusive activities.</li>
             <li><strong>Prohibited Uses:</strong> No spamming, hacking, copyright infringement, harassment, or posting of illegal/obscene content.</li>
-            <li><strong>Intellectual Property:</strong> All site content, trademarks, and software are owned by Tagad Platforms LLP or its licensors. Do not copy, reuse, or redistribute without permission.</li>
+            <li><strong>Intellectual Property:</strong> All site content, trademarks, and software are owned by Tagad Platforms  or its licensors. Do not copy, reuse, or redistribute without permission.</li>
             <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your account credentials.</li>
             <li><strong>Third-Party Links:</strong> We may link to third-party sites. We are not responsible for their content or privacy practices.</li>
             <li><strong>Limitation of Liability:</strong> We are not liable for damages resulting from your use of our site, except as required by law.</li>
             <li><strong>Dispute Resolution:</strong> Any disputes will be governed by the laws of Ontario, Canada. You agree to resolve disputes through binding arbitration or small claims court.</li>
             <li><strong>Changes to Terms:</strong> We may update these terms at any time. Continued use means you accept the new terms.</li>
-            <li><strong>Contact:</strong> Tagad Platforms LLP, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
+            <li><strong>Contact:</strong> Tagad Platforms , 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657</li>
           </ul>
         </div>
       </div>
