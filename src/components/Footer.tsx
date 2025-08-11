@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 import { Zap, Mail, Phone, MapPin, Twitter, Linkedin, Instagram, Github } from 'lucide-react';
 import React, { useState, useRef, useEffect, FormEvent } from "react";
 
-// --- Privacy Policy Modal ---
+/* ==============================
+   Privacy Policy Modal Component
+================================= */
 const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   if (!open) return null;
   return (
@@ -19,18 +21,18 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
         <div className="text-gray-700 text-sm space-y-4" style={{ maxHeight: "70vh", overflowY: "auto" }}>
           <p><strong>Last updated:</strong> June 28, 2025</p>
           <p>
-            <strong>Tagad Platforms</strong> (“we”, “us”, or “our”) is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you visit our website or use our services.
+            <strong>Tagad Platforms</strong> (“we”, “us”, or “our”) is committed to protecting your privacy.
           </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Information We Collect:</strong> Personal details (name, email, phone, company), usage data (IP, browser, device), and information you submit via forms or chatbots. We use cookies for analytics and site functionality.</li>
-            <li><strong>How We Use Your Information:</strong> To provide and improve services, respond to inquiries, send updates or marketing (with your consent), analyze usage, protect our site, and comply with legal obligations.</li>
-            <li><strong>Sharing Your Information:</strong> We do <b>not</b> sell your information. We may share it with trusted service providers, for legal reasons, or as part of a business transfer.</li>
-            <li><strong>Cookies:</strong> Used for site functionality and analytics. You can control cookies via your browser settings.</li>
-            <li><strong>Data Security:</strong> We use reasonable security measures to protect your data, but no method of transmission is 100% secure.</li>
-            <li><strong>Your Rights:</strong> You can request access, correction, or deletion of your data, and object to or restrict processing. Contact us at <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>.</li>
-            <li><strong>Children’s Privacy:</strong> We do not knowingly collect data from children under 16.</li>
-            <li><strong>Changes:</strong> We may update this policy. The latest version will always be posted here.</li>
-            <li><strong>Contact:</strong> Tagad Platforms, 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657 / +1 (416) 848-9289</li>
+            <li><strong>Information We Collect:</strong> Personal details, usage data, and cookies.</li>
+            <li><strong>How We Use Your Information:</strong> To provide and improve services, respond to inquiries, etc.</li>
+            <li><strong>Sharing Your Information:</strong> No selling; only with trusted providers or by law.</li>
+            <li><strong>Cookies:</strong> Used for site functionality and analytics.</li>
+            <li><strong>Data Security:</strong> Reasonable measures but no method is 100% secure.</li>
+            <li><strong>Your Rights:</strong> Request access, correction, or deletion of your data.</li>
+            <li><strong>Children’s Privacy:</strong> No collection from under 16.</li>
+            <li><strong>Changes:</strong> May update policy anytime.</li>
+            <li><strong>Contact:</strong> Tagad Platforms, Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a></li>
           </ul>
         </div>
       </div>
@@ -38,7 +40,9 @@ const PrivacyPolicyModal: React.FC<{ open: boolean; onClose: () => void }> = ({ 
   );
 };
 
-// --- Terms of Service Modal ---
+/* ==============================
+   Terms of Service Modal Component
+================================= */
 const TermsModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, onClose }) => {
   if (!open) return null;
   return (
@@ -54,19 +58,15 @@ const TermsModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
         <h2 className="text-2xl font-bold mb-4 text-blue-700">Terms of Service</h2>
         <div className="text-gray-700 text-sm space-y-4" style={{ maxHeight: "70vh", overflowY: "auto" }}>
           <p><strong>Last updated:</strong> June 28, 2025</p>
-          <p>
-            <strong>Agreement to Terms:</strong> By accessing and using Tagad Platforms ’s website or services, you agree to these Terms of Service. If you do not agree, do not use our site or services.
-          </p>
           <ul className="list-disc pl-6 space-y-2">
-            <li><strong>Use of Services:</strong> You must be at least 16 years old. Do not use our services for unlawful, harmful, or abusive activities.</li>
-            <li><strong>Prohibited Uses:</strong> No spamming, hacking, copyright infringement, harassment, or posting of illegal/obscene content.</li>
-            <li><strong>Intellectual Property:</strong> All site content, trademarks, and software are owned by Tagad Platforms  or its licensors. Do not copy, reuse, or redistribute without permission.</li>
-            <li><strong>Account Security:</strong> You are responsible for maintaining the confidentiality of your account credentials.</li>
-            <li><strong>Third-Party Links:</strong> We may link to third-party sites. We are not responsible for their content or privacy practices.</li>
-            <li><strong>Limitation of Liability:</strong> We are not liable for damages resulting from your use of our site, except as required by law.</li>
-            <li><strong>Dispute Resolution:</strong> Any disputes will be governed by the laws of Ontario, Canada. You agree to resolve disputes through binding arbitration or small claims court.</li>
-            <li><strong>Changes to Terms:</strong> We may update these terms at any time. Continued use means you accept the new terms.</li>
-            <li><strong>Contact:</strong> Tagad Platforms , 3070 Rotary Way, Burlington ON L7M 0H1, Canada. Email: <a href="mailto:support@brtagad.com" className="text-blue-500 underline">support@brtagad.com</a>, Phone: +91 9356961657 / +1 (416) 848-9289</li>
+            <li>Agreement to Terms: By using our site, you agree to these terms.</li>
+            <li>Use of Services: Must be 16+ and not for harmful activities.</li>
+            <li>Prohibited Uses: No spamming, hacking, harassment, or illegal content.</li>
+            <li>Intellectual Property: All rights reserved by Tagad Platforms.</li>
+            <li>Account Security: You are responsible for your credentials.</li>
+            <li>Third-Party Links: We aren’t responsible for their content.</li>
+            <li>Limitation of Liability: Not liable except as required by law.</li>
+            <li>Changes: Continued use means acceptance of updated terms.</li>
           </ul>
         </div>
       </div>
@@ -74,7 +74,9 @@ const TermsModal: React.FC<{ open: boolean; onClose: () => void }> = ({ open, on
   );
 };
 
-// --- Chatbot Widget Component (unchanged) ---
+/* ==============================
+   Chatbot Widget Component
+================================= */
 interface Message {
   from: "user" | "bot";
   text: string;
@@ -100,7 +102,7 @@ const ChatbotWidget: React.FC = () => {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/chatbot/ask`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ message: input })
+        body: JSON.stringify({ message: input }),
       });
       const data = await res.json();
       setMessages(msgs => [...msgs, { from: "bot", text: data.reply || data.error }]);
@@ -118,58 +120,31 @@ const ChatbotWidget: React.FC = () => {
 
   return (
     <>
-      {/* Floating Chatbot Button */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
           style={{
-            position: "fixed",
-            bottom: 150, // Above WhatsApp button
-            right: 20,
-            zIndex: 10000,
-            borderRadius: "50%",
-            width: 60,
-            height: 60,
-            background: "linear-gradient(135deg, #4f8cff 60%, #7f53ac 100%)",
-            color: "#fff",
-            border: "none",
-            boxShadow: "0 4px 16px rgba(0,0,0,0.18)",
-            fontSize: 32,
-            cursor: "pointer"
+            position: "fixed", bottom: 150, right: 20, zIndex: 10000, borderRadius: "50%",
+            width: 60, height: 60, background: "linear-gradient(135deg, #4f8cff 60%, #7f53ac 100%)",
+            color: "#fff", border: "none", boxShadow: "0 4px 16px rgba(0,0,0,0.18)", fontSize: 32, cursor: "pointer"
           }}
           aria-label="Open chatbot"
         >
           💬
         </button>
       )}
-
-      {/* Chat Widget Modal */}
       {open && (
         <div
           style={{
-            position: "fixed",
-            bottom: 150,
-            right: 20,
-            width: 340,
-            maxWidth: "90vw",
-            height: 480,
-            background: "white",
-            borderRadius: 16,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-            zIndex: 10001,
-            display: "flex",
-            flexDirection: "column",
-            overflow: "hidden"
+            position: "fixed", bottom: 150, right: 20, width: 340, maxWidth: "90vw", height: 480,
+            background: "white", borderRadius: 16, boxShadow: "0 8px 32px rgba(0,0,0,0.18)", zIndex: 10001,
+            display: "flex", flexDirection: "column", overflow: "hidden"
           }}
         >
-          {/* Header */}
           <div style={{
             background: "linear-gradient(135deg, #4f8cff 60%, #7f53ac 100%)",
-            color: "#fff",
-            padding: "16px 20px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between"
+            color: "#fff", padding: "16px 20px", display: "flex",
+            alignItems: "center", justifyContent: "space-between"
           }}>
             <div>
               <strong>Chat with TAGAD'S AI</strong>
@@ -180,12 +155,8 @@ const ChatbotWidget: React.FC = () => {
             }} aria-label="Close chatbot">&times;</button>
           </div>
           <div style={{
-            flex: 1,
-            padding: 16,
-            background: "#f6f8fa",
-            overflowY: "auto",
-            display: "flex",
-            flexDirection: "column"
+            flex: 1, padding: 16, background: "#f6f8fa",
+            overflowY: "auto", display: "flex", flexDirection: "column"
           }}>
             {messages.map((msg, i) => (
               <div
@@ -193,11 +164,8 @@ const ChatbotWidget: React.FC = () => {
                 style={{
                   alignSelf: msg.from === "user" ? "flex-end" : "flex-start",
                   background: msg.from === "user" ? "#e3e8ff" : "#fff",
-                  color: "#222",
-                  borderRadius: 16,
-                  padding: "8px 14px",
-                  margin: "4px 0",
-                  maxWidth: "80%"
+                  color: "#222", borderRadius: 16, padding: "8px 14px",
+                  margin: "4px 0", maxWidth: "80%"
                 }}
               >
                 {msg.text}
@@ -206,22 +174,15 @@ const ChatbotWidget: React.FC = () => {
             <div ref={messagesEndRef} />
           </div>
           <div style={{ padding: 12, background: "#fff", borderTop: "1px solid #eee" }}>
-            <form
-              style={{ display: "flex", gap: 8 }}
-              onSubmit={handleSubmit}
-            >
+            <form style={{ display: "flex", gap: 8 }} onSubmit={handleSubmit}>
               <input
                 value={input}
                 onChange={e => setInput(e.target.value)}
                 disabled={loading}
                 placeholder="Enter your message..."
                 style={{
-                  flex: 1,
-                  border: "1px solid #ddd",
-                  borderRadius: 8,
-                  padding: "8px 12px",
-                  color: "#222",
-                  background: "#fffbe6"
+                  flex: 1, border: "1px solid #ddd", borderRadius: 8,
+                  padding: "8px 12px", color: "#222", background: "#fffbe6"
                 }}
               />
               <button
@@ -229,12 +190,8 @@ const ChatbotWidget: React.FC = () => {
                 disabled={loading || !input.trim()}
                 style={{
                   background: "linear-gradient(135deg, #4f8cff 60%, #7f53ac 100%)",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 8,
-                  padding: "0 16px",
-                  fontWeight: 600,
-                  cursor: loading ? "not-allowed" : "pointer"
+                  color: "#fff", border: "none", borderRadius: 8,
+                  padding: "0 16px", fontWeight: 600, cursor: loading ? "not-allowed" : "pointer"
                 }}
               >
                 {loading ? "..." : "➤"}
@@ -247,6 +204,9 @@ const ChatbotWidget: React.FC = () => {
   );
 };
 
+/* ==============================
+   Footer Component
+================================= */
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const [privacyOpen, setPrivacyOpen] = useState(false);
@@ -254,10 +214,11 @@ const Footer = () => {
 
   return (
     <>
+      {/* ===== Footer Section ===== */}
       <footer className="bg-gray-900 border-t border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {/* Company Info */}
+            {/* --- Company Info */}
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
                 <Zap className="h-8 w-8 text-blue-400" />
@@ -269,42 +230,14 @@ const Footer = () => {
                 Vision to Impact — For a Billion and Beyond.
               </p>
               <div className="flex space-x-4">
-                <a
-                  href="https://github.com/brtagad2025"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                >
-                  <Github className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://twitter.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                >
-                  <Twitter className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/b-r-tagad-69816b370/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                >
-                  <Linkedin className="h-5 w-5" />
-                </a>
-                <a
-                  href="https://instagram.com/yourusername"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-blue-400 transition-colors"
-                >
-                  <Instagram className="h-5 w-5" />
-                </a>
+                <a href="https://github.com/brtagad2025" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors"><Github className="h-5 w-5" /></a>
+                <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors"><Twitter className="h-5 w-5" /></a>
+                <a href="https://www.linkedin.com/in/b-r-tagad-69816b370/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors"><Linkedin className="h-5 w-5" /></a>
+                <a href="https://instagram.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-blue-400 transition-colors"><Instagram className="h-5 w-5" /></a>
               </div>
             </div>
 
-            {/* Quick Links */}
+            {/* --- Quick Links */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-white">Quick Links</h3>
               <div className="space-y-2">
@@ -315,18 +248,14 @@ const Footer = () => {
                   { name: 'About Us', path: '/about' },
                   { name: 'Contact', path: '/contact' },
                 ].map((link) => (
-                  <Link
-                    key={link.name}
-                    to={link.path}
-                    className="block text-gray-400 hover:text-blue-400 transition-colors text-sm"
-                  >
+                  <Link key={link.name} to={link.path} className="block text-gray-400 hover:text-blue-400 transition-colors text-sm">
                     {link.name}
                   </Link>
                 ))}
               </div>
             </div>
 
-            {/* Services */}
+            {/* --- Services */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-white">Services</h3>
               <div className="space-y-2">
@@ -338,29 +267,23 @@ const Footer = () => {
                   'ERP Solutions',
                   'Project Management',
                 ].map((service) => (
-                  <div key={service} className="text-gray-400 text-sm">
-                    {service}
-                  </div>
+                  <div key={service} className="text-gray-400 text-sm">{service}</div>
                 ))}
               </div>
             </div>
 
-            {/* Contact Info */}
+            {/* --- Contact Info */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-white">Contact Info</h3>
               <div className="space-y-3">
                 <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <Mail className="h-4 w-4 text-blue-400" />
-                  <span>support@brtagad.com</span>
+                  <Mail className="h-4 w-4 text-blue-400" /> <span>support@brtagad.com</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <Phone className="h-4 w-4 text-blue-400" />
-                  <span>+91 9356961657 / +1 (416) 848-9289</span>
+                  <Phone className="h-4 w-4 text-blue-400" /> <span>+91 9356961657 / +1 (416) 848-9289</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <MapPin className="h-4 w-4 text-blue-400" />
-                  <span>Canada: 3070 Rotary Way, Burlington ON L7M 0H1.</span>
-                </div>
+                  <MapPin className="h-4 w-4 text-blue-400" /> <span>Canada: 3070 Rotary Way, Burlington ON L7M 0H1.</span>
                 </div>
               </div>
             </div>
@@ -371,65 +294,31 @@ const Footer = () => {
               © {currentYear} Tagad Platforms. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <a
-                href="#"
-                className="text-gray-400 hover:text-blue-400 text-sm transition-colors"
-                onClick={e => {
-                  e.preventDefault();
-                  setPrivacyOpen(true);
-                }}
-              >
-                Privacy Policy
-              </a>
-              <a
-                href="#"
-                className="text-gray-400 hover:text-blue-400 text-sm transition-colors"
-                onClick={e => {
-                  e.preventDefault();
-                  setTermsOpen(true);
-                }}
-              >
-                Terms of Service
-              </a>
+              <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors" onClick={e => { e.preventDefault(); setPrivacyOpen(true); }}>Privacy Policy</a>
+              <a href="#" className="text-gray-400 hover:text-blue-400 text-sm transition-colors" onClick={e => { e.preventDefault(); setTermsOpen(true); }}>Terms of Service</a>
             </div>
           </div>
         </div>
       </footer>
 
-      {/* WhatsApp Floating Button */}
+      {/* ===== Floating WhatsApp Button ===== */}
       <a
         href="https://wa.me/919356961657?text=Hello%20Tagad%20Team%2C%20I%20am%20interested%20in%20your%20services"
-        target="_blank"
-        rel="noopener noreferrer"
-        id="whatsapp-button"
-        style={{
-          position: 'fixed',
-          bottom: 80,
-          right: 20,
-          zIndex: 9999,
-          display: 'block',
-        }}
+        target="_blank" rel="noopener noreferrer" id="whatsapp-button"
+        style={{ position: 'fixed', bottom: 80, right: 20, zIndex: 9999, display: 'block' }}
       >
         <img
           src="https://i.ibb.co/6RFWWFjk/whasdsdsdsd.png"
           alt="Chat on WhatsApp"
-          style={{
-            height: 60,
-            width: 60,
-            borderRadius: '50%',
-            boxShadow: '0 4px 6px rgba(0,0,0,0.3)',
-            cursor: 'pointer',
-          }}
+          style={{ height: 60, width: 60, borderRadius: '50%', boxShadow: '0 4px 6px rgba(0,0,0,0.3)', cursor: 'pointer' }}
         />
       </a>
 
-      {/* Chatbot Floating Widget (above WhatsApp) */}
+      {/* ===== Chatbot Widget ===== */}
       <ChatbotWidget />
 
-      {/* Privacy Policy Modal */}
+      {/* ===== Modals ===== */}
       <PrivacyPolicyModal open={privacyOpen} onClose={() => setPrivacyOpen(false)} />
-
-      {/* Terms of Service Modal */}
       <TermsModal open={termsOpen} onClose={() => setTermsOpen(false)} />
     </>
   );
