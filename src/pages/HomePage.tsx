@@ -132,12 +132,7 @@ const HomePage = () => {
             transition={{ duration: 2 }}
             className="hero-title"
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black mb-6 leading-tight">
-              <span className="block bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                TAGAD
-              </span>
-              <span className="block text-white">PLATFORMS</span>
-            </h1>
+        
           </motion.div>
 
           <div className="hero-subtitle">
