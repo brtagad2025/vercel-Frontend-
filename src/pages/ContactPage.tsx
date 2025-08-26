@@ -107,7 +107,7 @@ const ContactPage = () => {
     {
       icon: MapPin,
       title: 'Visit Us',
-      details: 'Canada: 3070 Rotary Way, Burlington ON L7M 0H1.',
+      details: 'Pune,Maharashtra',
       description: 'Come say hello at our office'
     },
     {

@@ -283,7 +283,7 @@ const Footer = () => {
                   <Phone className="h-4 w-4 text-blue-400" /> <span>+91 9356961657 / +1 (416) 848-9289</span>
                 </div>
                 <div className="flex items-center space-x-3 text-gray-400 text-sm">
-                  <MapPin className="h-4 w-4 text-blue-400" /> <span>Canada: 3070 Rotary Way, Burlington ON L7M 0H1.</span>
+                  <MapPin className="h-4 w-4 text-blue-400" /> <span>Pune,Maharashtra</span>
                 </div>
               </div>
             </div>
